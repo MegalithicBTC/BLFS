@@ -86,3 +86,5 @@ shopify.app.*.toml
 /logs/
 !/data/.keep
 /data/
+!/caddy/.keep
+/caddy/
