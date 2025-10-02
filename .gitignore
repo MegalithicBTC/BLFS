@@ -1,0 +1,88 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log
+pnpm-lock.yaml
+
+# TypeScript / build
+dist/
+build/
+*.tsbuildinfo
+
+# Runtime / environment
+.env
+.env.*
+!.env.example
+*.secret
+*.key
+MASTER_KEY
+
+# Databases / data / logs
+/data/
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+dbdata/
+logs/
+*.log
+*.log.*
+app/logs/
+
+# Docker / containers
+docker-compose.override.yml
+docker-compose.*.yml
+/.docker
+/.dockerignore
+
+# Caddy / TLS (local runtime state)
+caddy/data/
+caddy/config/
+app/caddy_data/
+app/caddy_config/
+
+# Litestream state / replicas
+litestream-data/
+litestream-staging/
+*.replica
+
+# IDEs / editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing / coverage
+coverage/
+.nyc_output/
+
+# Temp / build artifacts
+/tmp/
+tmp/
+*.concat
+concat_sources.txt
+
+# Shopify CLI artifacts
+.shopify/
+shopify.app.*.toml
+!shopify.app.toml
+
+# Misc
+.node_repl_history
+.cache/
+.cache-loader/
+!/tmp/.keep
+/tmp/
+!/logs/.keep
+/logs/
+!/data/.keep
+/data/

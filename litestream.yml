@@ -1,0 +1,13 @@
+# Purpose: replicate SQLite to S3; reads LITESTREAM_REPLICA_URL from .env
+dbs:
+  - path: /data/app.sqlite
+    replicas:
+      - url: ${LITESTREAM_REPLICA_URL}
+        # AWS S3 settings (optional)
+        access-key-id: ${AWS_ACCESS_KEY_ID}
+        secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+        region: ${AWS_REGION}
+        
+        # Retention settings
+        retention: 72h
+        snapshot-interval: 1h

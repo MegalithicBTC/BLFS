@@ -1,0 +1,93 @@
+<%- include('layout_header', { title: `${shop.label || shop.domain} - Orders | BLFS` }) %>
+
+<div class="d-flex align-items-center mb-4">
+  <% if (shop.merchantLogoUrl) { %>
+    <img src="<%= shop.merchantLogoUrl %>" alt="<%= shop.domain %>" class="me-3" style="max-width: 150px; max-height: 60px; object-fit: contain;" onerror="this.style.display='none'">
+  <% } %>
+  <h1 class="mb-0">
+    <%= shop.label || shop.domain %>
+    <% if (shop.label) { %>
+      <small class="text-muted" style="font-size: 0.5em;">(<%= shop.domain %>)</small>
+    <% } %>
+  </h1>
+</div>
+
+<% if (orders.length === 0) { %>
+  <div class="alert alert-info">No orders yet.</div>
+<% } %>
+
+<% orders.forEach(o => { 
+  const sats = Math.round(parseInt(o.msat || '0') / 1000);
+  const btc = (sats / 100000000).toFixed(8);
+  
+  // Check if awaiting payment order has expired
+  const isExpired = o.status === 'awaiting_payment' && o.expiresAt && new Date(o.expiresAt) < new Date();
+  const displayStatus = isExpired ? 'expired' : o.status;
+  
+  const statusBadge = displayStatus === 'paid' ? 'success' : 
+                      displayStatus === 'awaiting_payment' ? 'warning' : 
+                      displayStatus === 'expired' ? 'secondary' :
+                      'danger';
+  const statusClass = displayStatus === 'paid' ? 'order-paid' : 
+                      displayStatus === 'awaiting_payment' ? 'order-awaiting' : 
+                      displayStatus === 'expired' ? 'order-expired' :
+                      'order-failed';
+%>
+  <div class="card mb-3 order-card <%= statusClass %>">
+    <div class="card-body">
+      <div class="row align-items-center mb-2">
+        <div class="col">
+          <% if (o.shopifyOrderName) { %>
+            <h5 class="card-title mb-1"><%= o.shopifyOrderName %></h5>
+          <% } %>
+          <span class="badge bg-<%= statusBadge %>"><%= displayStatus.replace('_', ' ').toUpperCase() %></span>
+        </div>
+        <div class="col-auto text-end">
+          <h4 class="mb-0"><%= o.amountPresentment.toFixed(2) %> <%= o.presentmentCurrency %></h4>
+          <% if (sats > 0) { %>
+            <small class="text-muted"><%= sats.toLocaleString() %> sats (₿ <%= btc %>)</small>
+          <% } %>
+        </div>
+      </div>
+      
+      <% if (o.orderSummary) { %>
+        <p class="card-text mb-2"><strong>Order:</strong> <%= o.orderSummary %></p>
+      <% } %>
+      
+      <% if (o.customerNote) { %>
+        <p class="card-text mb-2"><small><strong>Note:</strong> <%= o.customerNote %></small></p>
+      <% } %>
+      
+      <div class="row g-2 mt-2 small">
+        <div class="col-md-4">
+          <strong>Created:</strong><br>
+          <span data-timestamp="<%= o.createdAt.toISOString() %>"><%= o.createdAt.toISOString() %></span>
+        </div>
+        <% if (o.paidAt) { %>
+          <div class="col-md-4">
+            <strong>Paid:</strong><br>
+            <span data-timestamp="<%= o.paidAt.toISOString() %>"><%= o.paidAt.toISOString() %></span>
+          </div>
+        <% } else if (o.status === 'awaiting_payment' || displayStatus === 'expired') { %>
+          <div class="col-md-4">
+            <strong>Expires:</strong><br>
+            <span data-timestamp="<%= o.expiresAt.toISOString() %>"><%= o.expiresAt.toISOString() %></span>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+<% }) %>
+
+<script>
+  // Format timestamps to local timezone
+  document.querySelectorAll('[data-timestamp]').forEach(el => {
+    const iso = el.getAttribute('data-timestamp');
+    if (iso) {
+      const date = new Date(iso);
+      el.textContent = date.toLocaleString();
+    }
+  });
+</script>
+
+<%- include('layout_footer') %>

@@ -1,0 +1,193 @@
+<!-- Purpose: hosted invoice page; renders QR and polls server for status. -->
+<!doctype html>
+<html>
+  <head>
+    <%- include('partials_head') %>
+    <title>Pay Lightning Invoice - <%= orderName || 'Order' %> | BLFS</title>
+  </head>
+  <body>
+    <div class="container py-5">
+
+<%
+  const sats = Math.floor(parseInt(order.msat) / 1000); 
+  const btc = (sats / 100000000).toFixed(8);
+%>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <% if (shop.merchantLogoUrl) { %>
+        <div class="text-center mt-2 mb-3">
+          <img src="<%= shop.merchantLogoUrl %>" alt="<%= shop.domain %>" style="max-width: 250px; max-height: 100px; object-fit: contain;" onerror="this.style.display='none'">
+        </div>
+      <% } %>
+      <div class="text-center mb-4">
+        <h1 class="display-5">⚡ Pay with Lightning</h1>
+        <p class="text-muted">Scan the QR code with your Lightning wallet</p>
+      </div>
+      
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <% if (order.orderSummary) { %>
+            <h5 class="card-title mb-3">Order Details</h5>
+            <p class="mb-2"><%= order.orderSummary %></p>
+          <% } %>
+          
+          <div class="row g-3 align-items-center">
+            <div class="col-md-6">
+              <h3 class="mb-1"><%= order.amountPresentment.toFixed(2) %> <%= order.presentmentCurrency %></h3>
+              <p class="text-muted mb-0">
+                <%= sats.toLocaleString() %> sats<br>
+                <small>₿ <%= btc %></small>
+              </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div id="countdown" class="h4 text-warning mb-1"></div>
+              <div id="status" class="badge bg-info">Awaiting payment...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-6 text-center">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <canvas id="qrc" width="280" height="280" class="mx-auto"></canvas>
+              <button class="btn btn-outline-primary btn-sm mt-3" onclick="copyInvoice()">
+                📋 Copy Invoice
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-3 text-muted">Lightning Invoice</h6>
+              <div class="p-3 bg-light rounded" style="word-break: break-all; font-size: 0.85rem; font-family: monospace; max-height: 280px; overflow-y: auto;">
+                <a href="lightning:<%= bolt11 %>" id="bolt" class="text-decoration-none text-dark"><%= bolt11 %></a>
+              </div>
+              <div class="mt-3">
+                <small class="text-muted">
+                  💡 Tap the invoice above to open your wallet app on mobile
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Toast notification for copy confirmation -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="copyToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-success text-white">
+        <strong class="me-auto">✓ Copied!</strong>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Lightning invoice copied to clipboard
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script>
+    const bolt11 = <%- JSON.stringify(bolt11) %>;
+    QRCode.toCanvas(document.getElementById('qrc'), bolt11, { width: 280, margin: 2 });
+    const publicId = <%- JSON.stringify(publicId) %>;
+    const invoiceRef = <%- JSON.stringify(invoiceRef) %>;
+    const until = new Date(<%- JSON.stringify(expiresAtISO) %>).getTime();
+    
+    function copyInvoice(event) {
+      // Capture button reference before async operation
+      const btn = event.target;
+      const orig = btn.textContent;
+      
+      navigator.clipboard.writeText(bolt11).then(() => {
+        // Show toast notification
+        const toastEl = document.getElementById('copyToast');
+        const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+        toast.show();
+        
+        // Update button temporarily
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('btn-success');
+        btn.classList.remove('btn-outline-primary');
+        setTimeout(() => { 
+          btn.textContent = orig;
+          btn.classList.remove('btn-success');
+          btn.classList.add('btn-outline-primary');
+        }, 2000);
+      }).catch(err => {
+        // Fallback if clipboard API fails
+        console.error('Clipboard copy failed:', err);
+        alert('Failed to copy. Please copy manually.');
+      });
+    }
+    
+    function updateCountdown() {
+      const remaining = until - Date.now();
+      if (remaining <= 0) {
+        document.getElementById('countdown').textContent = 'Expired';
+        document.getElementById('countdown').className = 'h4 text-danger mb-1';
+        return false;
+      }
+      const mins = Math.floor(remaining / 60000);
+      const secs = Math.floor((remaining % 60000) / 1000);
+      document.getElementById('countdown').textContent = `${mins}:${secs.toString().padStart(2, '0')} remaining`;
+      return true;
+    }
+    
+    function nextDelay(ms) { 
+      if(ms < 120000) return 3000; 
+      if(ms < 300000) return 6000; 
+      return 12000; 
+    }
+    
+    let stop = false;
+    const start = Date.now();
+    
+    async function poll() {
+      if(stop) return;
+      
+      if(!updateCountdown()) {
+        document.getElementById('status').textContent = 'Expired';
+        document.getElementById('status').className = 'badge bg-danger';
+        return;
+      }
+      
+      const r = await fetch(`/checkout/${publicId}/check-invoice?invoiceRef=${encodeURIComponent(invoiceRef)}`)
+        .then(r => r.json())
+        .catch(() => ({status: 'awaiting_payment'}));
+      
+      if(r.status === 'paid') { 
+        document.getElementById('status').textContent = 'Paid ✓ Redirecting...';
+        document.getElementById('status').className = 'badge bg-success';
+        document.getElementById('countdown').textContent = 'Payment received!';
+        document.getElementById('countdown').className = 'h4 text-success mb-1';
+        stop = true;
+        
+        setTimeout(() => {
+          if (r.redirectUrl) {
+            window.location.href = r.redirectUrl;
+          } else {
+            document.getElementById('status').textContent = 'Payment Complete ✓';
+          }
+        }, 1500);
+        return; 
+      }
+      
+      setTimeout(poll, nextDelay(Date.now() - start));
+    }
+    
+    // Update countdown every second
+    setInterval(() => {
+      if(!stop) updateCountdown();
+    }, 1000);
+    
+    updateCountdown();
+    poll();
+  </script>
+
+<%- include('layout_footer') %>

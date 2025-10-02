@@ -1,0 +1,112 @@
+/* Purpose: tiny shared styling */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  color: #111;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #f5f5f5;
+}
+
+/* Ensure container has proper margins on all screen sizes */
+.container {
+  width: 100% !important;
+  max-width: 1140px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 575px) {
+  .container {
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px !important;
+  }
+}
+
+input, button { padding: 8px; font: inherit; }
+code { background: #f6f8fa; padding: 2px 4px; border-radius: 3px; }
+
+/* Flash messages */
+.flash-message {
+  padding: 8px;
+  background: #f8f8f8;
+  margin: 8px 0;
+}
+.flash-ok {
+  border: 1px solid #0a0;
+}
+.flash-error {
+  border: 1px solid #a00;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Order status backgrounds - very light tints for readability */
+.order-paid {
+  background-color: #d1f4e0 !important;
+  border-left: 4px solid #28a745 !important;
+}
+.order-awaiting {
+  background-color: #fff3cd !important;
+  border-left: 4px solid #ffc107 !important;
+}
+.order-failed {
+  background-color: #f8d7da !important;
+  border-left: 4px solid #dc3545 !important;
+}
+.order-expired {
+  background-color: #e2e3e5 !important;
+  border-left: 4px solid #6c757d !important;
+}
+.order-card {
+  color: #212529 !important;
+}
+.order-card h5, 
+.order-card h4, 
+.order-card p,
+.order-card strong,
+.order-card span {
+  color: #212529 !important;
+}

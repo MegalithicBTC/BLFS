@@ -1,0 +1,149 @@
+<!-- Purpose: developer homepage. Called by GET /dev -->
+<%- include('layout_header', { title: 'Developer Portal - All Shops | BLFS' }) %>
+
+<h1 class="mb-4">Developer Portal</h1>
+  
+  <% if (typeof query !== 'undefined' && query.deleted) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      ✅ Merchant deleted successfully (including all associated orders)
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% } %>
+  
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Create New Shop</h5>
+        </div>
+        <div class="card-body">
+          <form id="createShopForm" method="post" action="/dev/shops">
+    
+            <div class="mb-4">
+              <h6 class="text-muted mb-3">Merchant Information</h6>
+              <div class="mb-3">
+                <label class="form-label">Label</label>
+                <input name="label" class="form-control" placeholder="My Shop" required>
+                <small class="form-text text-muted">An arbitrary label to help you identify this merchant</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Merchant Username</label>
+                <input name="merchantUser" class="form-control" placeholder="merchant_user" required>
+                <div class="invalid-feedback"></div>
+                <small class="form-text text-muted">Max 20 chars, no spaces, letters/numbers/hyphens/underscores only</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Merchant Logo URL (optional)</label>
+                <input name="merchantLogoUrl" class="form-control" placeholder="https://example.com/logo.png">
+                <div class="invalid-feedback"></div>
+                <small class="form-text text-muted">Must be a valid image URL (.png, .jpg, .webp, etc.)</small>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="mb-4">
+              <h6 class="text-muted mb-3">Shopify Configuration</h6>
+              <small class="d-block text-muted mb-3">Get these values from your Shopify Partner Dashboard</small>
+              <div class="mb-3">
+                <label class="form-label">Shopify Domain</label>
+                <input name="domain" class="form-control" placeholder="your-shop.myshopify.com" required>
+                <div class="invalid-feedback"></div>
+                <small class="form-text text-muted">Your Shopify store domain (must end with .myshopify.com). No https:// or trailing /</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Shopify Client ID</label>
+                <input name="shopifyApiKey" class="form-control" placeholder="Client ID" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Shopify Client Secret</label>
+                <input name="shopifyApiSecret" class="form-control" placeholder="Client Secret" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Shopify CLI Token</label>
+                <input name="shopifyCliToken" class="form-control" placeholder="CLI Token" required>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="mb-4">
+              <h6 class="text-muted mb-3">Payment Configuration</h6>
+              <div class="mb-3">
+                <label class="form-label">NWC URI</label>
+                <input name="nwcUri" class="form-control" placeholder="nostr+walletconnect://..." required>
+                <div class="invalid-feedback"></div>
+                <small class="form-text text-muted">Must start with nostr+walletconnect:// and include relay parameter</small>
+              </div>
+            </div>
+            
+            <button id="createShopBtn" type="submit" class="btn btn-primary btn-lg w-100" disabled>Create Shop</button>
+          </form>
+          
+          <script src="/static/validation.js"></script>
+          <script>
+            // Setup validation with required fields (logo URL is optional)
+            setupFormValidation('createShopForm', {
+              'merchantUser': 'merchantUsername',
+              'domain': 'shopifyDomain',
+              'merchantLogoUrl': 'logoUrl',
+              'nwcUri': 'nwcUri'
+            }, 'createShopBtn', [
+              'label',
+              'merchantUser',
+              'domain',
+              'shopifyApiKey',
+              'shopifyApiSecret',
+              'shopifyCliToken',
+              'nwcUri'
+            ]);
+          </script>
+        </div>
+      </div>
+      
+      <% if (created) { %>
+        <div class="alert alert-success" role="alert">
+          <h5 class="alert-heading">✓ Shop Created Successfully!</h5>
+          <hr>
+          <p class="mb-1"><strong>Portal URL:</strong></p>
+          <p><code class="user-select-all"><%= created.portal %></code></p>
+          <p class="mb-1"><strong>Username:</strong></p>
+          <p><code class="user-select-all"><%= created.user %></code></p>
+          <p class="mb-1"><strong>Password (shown once!):</strong></p>
+          <p><code class="user-select-all"><%= created.password %></code></p>
+          <% if (created.nwcError) { %>
+            <div class="alert alert-warning mt-3">
+              ⚠️ NWC Error: <%= created.nwcError %><br>
+              <small>You can register the NWC URI later in the shop details page.</small>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+      
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Existing Shops</h5>
+        </div>
+        <div class="list-group list-group-flush">
+          <% if (shops.length === 0) { %>
+            <div class="list-group-item text-muted">No shops yet. Create one above!</div>
+          <% } %>
+          <% shops.forEach(s => { %>
+            <a href="/dev/shops/<%= s.publicId %>" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <% if (s.merchantLogoUrl) { %>
+                    <img src="<%= s.merchantLogoUrl %>" alt="<%= s.domain %>" class="me-3" style="max-width: 80px; max-height: 40px; object-fit: contain;" onerror="this.style.display='none'">
+                  <% } %>
+                  <h6 class="mb-0"><%= s.domain %></h6>
+                </div>
+                <small class="text-muted"><%= s.label %></small>
+              </div>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('layout_footer') %>

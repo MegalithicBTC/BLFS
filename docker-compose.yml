@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    env_file: ./.env
+    network_mode: "host"
+    restart: unless-stopped
+    stop_grace_period: 1s
+    command: sh -c "/workspace/docker-start.sh"
+
+    volumes:
+      - ./:/workspace
+      - ./data:/data
+      - ./logs:/logs
+      - ./tmp:/tmp
+      - ./litestream.yml:/etc/litestream.yml:ro
+
+  caddy:
+    image: caddy:latest
+    env_file: ./.env
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/data:/data
+      - ./caddy/config:/config

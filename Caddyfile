@@ -1,0 +1,7 @@
+{$THIS_APP_DOMAIN} {
+  encode gzip
+  reverse_proxy 127.0.0.1:8080
+  header {
+    Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  }
+}

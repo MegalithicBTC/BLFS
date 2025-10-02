@@ -1,0 +1,21 @@
+# Purpose: extension configuration consumed by Shopify CLI during deploy.
+api_version = "2025-07"
+
+[[extensions]]
+name = "Complete Payment With Bitcoin Lightning"
+handle = "BLFS"
+description = "Pay with Bitcoin Lightning"
+type = "ui_extension"
+
+[[extensions.targeting]]
+target = "purchase.thank-you.block.render"
+module = "./src/index.jsx"
+
+[extensions.capabilities]
+# Gives your extension access to directly query Shopify's storefront API.
+api_access = false
+
+# Gives your extension access to make external network calls, using the
+# JavaScript `fetch()` API. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#network-access
+network_access = true
