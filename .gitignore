@@ -18,8 +18,8 @@ build/
 MASTER_KEY
 
 # Databases / data / logs
-/data/
-data/
+data/*
+!/data/.keep
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
@@ -29,7 +29,8 @@ data/
 *.db-wal
 *.db-journal
 dbdata/
-logs/
+logs/*
+!/logs/.keep
 *.log
 *.log.*
 app/logs/
@@ -43,6 +44,8 @@ docker-compose.*.yml
 # Caddy / TLS (local runtime state)
 caddy/data/
 caddy/config/
+caddy/*
+!/caddy/.keep
 app/caddy_data/
 app/caddy_config/
 
@@ -66,8 +69,8 @@ coverage/
 .nyc_output/
 
 # Temp / build artifacts
-/tmp/
-tmp/
+tmp/*
+!/tmp/.keep
 *.concat
 concat_sources.txt
 
@@ -80,11 +83,3 @@ shopify.app.*.toml
 .node_repl_history
 .cache/
 .cache-loader/
-!/tmp/.keep
-/tmp/
-!/logs/.keep
-/logs/
-!/data/.keep
-/data/
-!/caddy/.keep
-/caddy/

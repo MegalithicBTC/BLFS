@@ -1,0 +1,2 @@
+# This file ensures the tmp directory is tracked by Git
+# The tmp directory is used for temporary build and runtime files

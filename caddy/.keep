@@ -1,0 +1,2 @@
+# This file ensures the caddy directory is tracked by Git
+# The caddy directory contains Caddy reverse proxy configuration and data
