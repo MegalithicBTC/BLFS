@@ -97,6 +97,7 @@ router.get('/pay/:publicId', async (req, res, next) => {
       invoiceRef,
       bolt11,
       expiresAtISO: order!.expiresAt.toISOString(),
+      orderName: order!.shopifyOrderName || 'Order',
       shop: {
         domain: shop.domain,
         merchantLogoUrl: shop.merchantLogoUrl

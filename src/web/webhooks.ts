@@ -52,10 +52,10 @@ router.post('/orders-create', raw({ type: '*/*' }), async (req, res) => {
     const orderGid = `gid://shopify/Order/${orderId}`;
     const orderName = payload.name || payload.order_number;
 
-    // Log full webhook payload for debugging
-    // console.log('=== WEBHOOK FULL PAYLOAD ===');
-    // console.log(JSON.stringify(payload, null, 2));
-    // console.log('=== END WEBHOOK PAYLOAD ===');
+
+    console.log('=== WEBHOOK FULL PAYLOAD ===');
+    console.log(JSON.stringify(payload, null, 2));
+    console.log('=== END WEBHOOK PAYLOAD ===');
 
     logger.info({ 
       msg: 'webhook HMAC verified', 
