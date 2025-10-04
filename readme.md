@@ -15,9 +15,13 @@ BLFS (Bitcoin Lightning for Shopify) is a decentralized server application that 
 
 **Incentives:** Developers (subject to agreement with Shopify merchants) can earn fees on each Shopify sale through BLFS. One developer can service multiple merchants.
 
-## License
+---
 
-MIT License - see below for full text.
+## Prior Art
+
+This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
+
+If you need to support on-chain Bitcoin payments, please use the BTCPay Server integration documented at [docs.btcpayserver.org/ShopifyV2/](https://docs.btcpayserver.org/ShopifyV2/).
 
 ---
 
@@ -29,21 +33,21 @@ Complete documentation is available at [Megalith Lightning Docs](https://docs.me
 
 1. **[Getting Started](https://docs.megalithic.me/BLFS/getting-started)** - Overview of BLFS architecture, benefits for merchants and operators, and real-world examples.
 
-2. **[First Steps for Merchant](https://docs.megalithic.me/BLFS/first-steps-for-merchant)** - Merchant signs up for NWC service, obtains receive-only credentials, and provides Shopify store domain.
+2. **[First Steps for Merchant](https://docs.megalithic.me/BLFS/first_steps_for_merchant)** - Merchant signs up for NWC service, obtains receive-only credentials, and provides Shopify store domain.
 
-3. **[First Steps for Developer](https://docs.megalithic.me/BLFS/first-steps-for-developer)** - Developer configures domain, VPS hosting, and gathers merchant's NWC credentials and Shopify store URL.
+3. **[First Steps for Developer](https://docs.megalithic.me/BLFS/first_steps_for_developer)** - Developer configures domain, VPS hosting, and gathers merchant's NWC credentials and Shopify store URL.
 
-4. **[Shopify Partner Setup for Developer](https://docs.megalithic.me/BLFS/shopify-partner-setup-for-developer)** - Developer creates Shopify Partner account and configures custom app with distribution link.
+4. **[Shopify Partner Setup for Developer](https://docs.megalithic.me/BLFS/shopify-partner-setup-for-developer)** - Developer creates Shopify Partner account (FREE) and configures custom app with distribution link.
 
-5. **[Merchant Uses Install Link](https://docs.megalithic.me/BLFS/merchant-uses-install-link)** - Merchant installs BLFS custom app to their Shopify store using the distribution link.
+5. **[Merchant Uses Install Link](https://docs.megalithic.me/BLFS/merchant_uses_install_link)** - Merchant installs BLFS custom app to their Shopify store using the distribution link.
 
 6. **[Developer: Add Merchant to BLFS](https://docs.megalithic.me/BLFS/developer-add-merchant-to-blfs)** - Developer starts BLFS server and adds merchant's shop configuration via the developer portal at `/dev`.
 
 7. **[Developer: Deploy BLFS To Shop](https://docs.megalithic.me/BLFS/developer-deploy-shop)** - Developer deploys the BLFS app to merchant's Shopify store and grants necessary permissions.
 
-8. **[Merchant: Add Buttons & Payment Method](https://docs.megalithic.me/BLFS/merchant-add-buttons-to-ui)** - Merchant adds Bitcoin Lightning payment buttons to checkout and configures manual payment method.
+8. **[Merchant: Add Buttons & Payment Method](https://docs.megalithic.me/BLFS/merchant_add_buttons_to_ui)** - Merchant adds Bitcoin Lightning payment buttons to checkout and configures manual payment method.
 
-9. **[Developer: Try a Test Checkout](https://docs.megalithic.me/BLFS/developer-try-a-test-checkout)** - Developer performs test checkout to verify Bitcoin Lightning payment flow works correctly.
+9. **[Developer: Try a Test Checkout](https://docs.megalithic.me/BLFS/developer_try_a_test_checkout)** - Developer performs test checkout to verify Bitcoin Lightning payment flow works correctly.
 
 ---
 
@@ -54,7 +58,7 @@ Complete documentation is available at [Megalith Lightning Docs](https://docs.me
 - Linux VPS (minimum 1 vCPU, 2 GB RAM)
 - Docker and Docker Compose installed
 - Domain name pointed to your VPS
-- Shopify Partner account
+- Shopify Partner account (FREE)
 
 ### Environment Configuration
 
@@ -131,8 +135,6 @@ docker-compose logs -f app
 # Stop BLFS
 docker-compose down
 
-# View database
-sqlite3 ./data/app.sqlite
 ```
 
 ### Architecture
@@ -143,6 +145,21 @@ sqlite3 ./data/app.sqlite
 - **Docker Compose** - Container orchestration
 - **Nostr Wallet Connect** - Lightning payment protocol
 
+### Optional: Litestream Database Replication
+
+BLFS includes optional [Litestream](https://litestream.io/) support for continuous SQLite replication to cloud storage (S3, Google Cloud Storage, Azure Blob Storage, or local filesystem). This provides disaster recovery and enables zero-downtime migrations.
+
+To enable Litestream backups, configure the following in your `.env` file:
+
+```bash
+LITESTREAM_REPLICA_URL=s3://your-bucket/replication/app.sqlite
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=us-east-1
+```
+
+See the [Litestream documentation](https://litestream.io/guides/s3/) for detailed configuration options.
+
 ---
 
 ## MIT License
@@ -150,7 +167,7 @@ sqlite3 ./data/app.sqlite
 ```
 MIT License
 
-Copyright (c) 2025 Megalithic
+Copyright (c) 2025 Megalithic.me
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -175,4 +192,4 @@ SOFTWARE.
 
 ## Support
 
-For detailed setup instructions, troubleshooting, and best practices, visit the [complete documentation](https://docs.megalithic.me/BLFS/).
+For detailed setup instructions, troubleshooting, and best practices, visit the [complete documentation](https://docs.megalithic.me/category/blfs-bitcoin-lightning-for-shopify).
