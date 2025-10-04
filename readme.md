@@ -175,7 +175,7 @@ Complete documentation is available at [BLFS @ Megalith Lightning Docs](https://
 
 4. **[Shopify Partner Setup](https://docs.megalithic.me/BLFS/shopify-partner-setup-for-developer)** `[Developer]` - Developer creates Shopify Partner account (FREE) and configures custom app with distribution link.
 
-5. **[Click Install Link](https://docs.megalithic.me/BLFS/merchant_uses_install_link)** `[Merchant]` - Merchant installs BLFS custom app to their Shopify store using the distribution link.
+5. **[App Installation](https://docs.megalithic.me/BLFS/merchant_uses_install_link)** `[Merchant]` - Merchant installs BLFS custom app to their Shopify store using the distribution link.
 
 6. **[Add Merchant to BLFS](https://docs.megalithic.me/BLFS/developer-add-merchant-to-blfs)** `[Developer]` - Developer starts BLFS server and adds merchant's shop configuration via the developer portal at `/dev`.
 
