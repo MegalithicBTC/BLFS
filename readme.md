@@ -7,21 +7,13 @@
 
 ## About
 
-BLFS (Bitcoin Lightning for Shopify) is a decentralized server application that connects Shopify merchants to Bitcoin Lightning payments via NWC (Nostr Wallet Connect). 
+BLFS (Bitcoin Lightning for Shopify) is a lightweight server application. It connects Shopify merchants to Bitcoin Lightning payments via NWC (Nostr Wallet Connect). 
 
-**Decentralization:** BLFS is designed to be run by anyone - there's no single point of control or failure. Any developer can run their own BLFS instance and connect merchants to any NWC-compatible Lightning service. 
+**Decentralization:** BLFS is designed to be run by anyone - there's no single point of control or failure. Any developer may run their own BLFS instance and connect merchants to any of many NWC-compatible Lightning services. 
 
-**How it works with NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS handles invoice generation, payment monitoring, and Shopify order fulfillment.
+**How it works with NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS runs a lightweight web server that handles invoice generation, payment monitoring, and marking orders as "paid" in Shopify's database. 
 
-**Incentives:** Developers (subject to agreement with Shopify merchants) can earn fees on each Shopify sale through BLFS. One developer can service multiple merchants.
-
----
-
-## Rationale
-
-There are millions of Shopify merchants worldwide who could be onboarded to Lightning. BLFS addresses this by enabling a decentralized network of developers - from junior coders to experienced engineers - to deploy Lightning payment infrastructure for merchants.
-
-By lowering the technical barrier and removing centralized gatekeepers, BLFS allows thousands of developers to independently onboard millions of merchants. Each developer can service multiple merchants and earn fees.
+**Incentives:** Developers (subject to agreement with Shopify merchants) may earn fees on each Shopify sale through BLFS. One developer can service multiple merchants. This is an excellent tool for an independent operator who wants to onboard a number of Shopify merchants.
 
 ---
 
@@ -29,34 +21,32 @@ By lowering the technical barrier and removing centralized gatekeepers, BLFS all
 
 This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
 
-If you need to support on-chain Bitcoin payments, please use the BTCPay Server integration documented at [docs.btcpayserver.org/ShopifyV2/](https://docs.btcpayserver.org/ShopifyV2/).
+(Note: BLFS only supports Lightning payments.  If you need to support on-chain Bitcoin payments (not via Lightning), please use the BTCPay Server Shopify integration documented at [docs.btcpayserver.org/ShopifyV2/](https://docs.btcpayserver.org/ShopifyV2/).)
 
 ---
 
 ## Documentation
 
-Complete documentation is available at [Megalith Lightning Docs](https://docs.megalithic.me/BLFS/getting-started)
-
+Complete documentation is available at [BLFS @ Megalith Lightning Docs](https://docs.megalithic.me/BLFS/getting-started).
 ### Documentation Pages
 
 1. **[Getting Started](https://docs.megalithic.me/BLFS/getting-started)** - Overview of BLFS architecture, benefits for merchants and operators, and real-world examples.
 
-2. **[First Steps for Merchant](https://docs.megalithic.me/BLFS/first_steps_for_merchant)** - Merchant signs up for NWC service, obtains receive-only credentials, and provides Shopify store domain.
+2. **[First Steps for Merchant](https://docs.megalithic.me/BLFS/first_steps_for_merchant)** `[Merchant]` - Merchant signs up for NWC service, obtains receive-only credentials, and provides Shopify store domain.
 
-3. **[First Steps for Developer](https://docs.megalithic.me/BLFS/first_steps_for_developer)** - Developer configures domain, VPS hosting, and gathers merchant's NWC credentials and Shopify store URL.
+3. **[First Steps for Developer](https://docs.megalithic.me/BLFS/first_steps_for_developer)** `[Developer]` - Developer configures domain, VPS hosting, and gathers merchant's NWC credentials and Shopify store URL.
 
-4. **[Shopify Partner Setup for Developer](https://docs.megalithic.me/BLFS/shopify-partner-setup-for-developer)** - Developer creates Shopify Partner account (FREE) and configures custom app with distribution link.
+4. **[Shopify Partner Setup](https://docs.megalithic.me/BLFS/shopify-partner-setup-for-developer)** `[Developer]` - Developer creates Shopify Partner account (FREE) and configures custom app with distribution link.
 
-5. **[Merchant Uses Install Link](https://docs.megalithic.me/BLFS/merchant_uses_install_link)** - Merchant installs BLFS custom app to their Shopify store using the distribution link.
+5. **[Click Install Link](https://docs.megalithic.me/BLFS/merchant_uses_install_link)** `[Merchant]` - Merchant installs BLFS custom app to their Shopify store using the distribution link.
 
-6. **[Developer: Add Merchant to BLFS](https://docs.megalithic.me/BLFS/developer-add-merchant-to-blfs)** - Developer starts BLFS server and adds merchant's shop configuration via the developer portal at `/dev`.
+6. **[Add Merchant to BLFS](https://docs.megalithic.me/BLFS/developer-add-merchant-to-blfs)** `[Developer]` - Developer starts BLFS server and adds merchant's shop configuration via the developer portal at `/dev`.
 
-7. **[Developer: Deploy BLFS To Shop](https://docs.megalithic.me/BLFS/developer-deploy-shop)** - Developer deploys the BLFS app to merchant's Shopify store and grants necessary permissions.
+7. **[Deploy BLFS To Shop](https://docs.megalithic.me/BLFS/developer-deploy-shop)** `[Developer]` - Developer deploys the BLFS app to merchant's Shopify store and grants necessary permissions.
 
-8. **[Merchant: Add Buttons & Payment Method](https://docs.megalithic.me/BLFS/merchant_add_buttons_to_ui)** - Merchant adds Bitcoin Lightning payment buttons to checkout and configures manual payment method.
+8. **[Add Buttons & Payment Method](https://docs.megalithic.me/BLFS/merchant_add_buttons_to_ui)** `[Merchant]` - Merchant adds Bitcoin Lightning payment buttons to checkout and configures manual payment method.
 
-9. **[Developer: Try a Test Checkout](https://docs.megalithic.me/BLFS/developer_try_a_test_checkout)** - Developer performs test checkout to verify Bitcoin Lightning payment flow works correctly.
-
+9. **[Try a Test Checkout](https://docs.megalithic.me/BLFS/developer_try_a_test_checkout)** `[Developer]` - Developer performs test checkout to verify Bitcoin Lightning payment flow works correctly.
 ---
 
 ## Technical Quickstart
