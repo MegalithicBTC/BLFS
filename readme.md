@@ -9,7 +9,11 @@
 
 BLFS (Bitcoin Lightning for Shopify) is a lightweight server application. It connects Shopify merchants to Bitcoin Lightning payments via NWC (Nostr Wallet Connect). 
 
-**Decentralization:** BLFS is designed to be run by anyone. Any developer may run their own BLFS instance and connect merchants to any of many NWC-compatible Lightning services. 
+**Decentralization:** BLFS is designed to be run by anyone. Any developer may run their own BLFS instance and connect merchants to any of many NWC-compatible Lightning services.
+
+** NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS runs a lightweight web server that handles invoice generation, payment monitoring, and marking orders as "paid" in Shopify's database. 
+
+**Incentives:** Developers (subject to agreement with Shopify merchants) may earn fees on each Shopify sale through BLFS. One developer can service multiple merchants. This is an excellent tool for an independent operator who wants to onboard a number of Shopify merchants.
 
 ### How BLFS Works: Two Key Roles
 
@@ -19,7 +23,7 @@ The store owner who wants to accept Bitcoin Lightning payments.
 #### Role #2: BLFS Developer 👨‍💻
 A developer who sets up and operates BLFS to integrate Lightning payments with Shopify store(s).
 
-### Basic Setup: One Developer, One Merchant (Merchant connects to an NWC service)
+### Basic Setup: One Developer, One Merchant 
 
 ```mermaid
 graph LR
@@ -31,7 +35,7 @@ graph LR
   style NWC fill:#9c27b0,color:#fff
 ```
 
-### Scalable Setup: One Developer, Multiple Merchants (each merchant picks their own NWC)
+### Scalable Setup: One Developer, Multiple Merchants 
 
 A single BLFS developer can service multiple Shopify merchants, managing Lightning payment infrastructure for all of them.
 
@@ -60,7 +64,7 @@ graph TD
 
 
 
-### Complete Ecosystem: Maximum Decentralization (many devs, many merchants, many NWC services)
+### Complete Ecosystem: Maximum Decentralization 
 
 Each merchant can choose any NWC service, and each developer can support multiple merchants. This creates a truly permissionless, censorship-resistant payment infrastructure.
 
@@ -127,10 +131,6 @@ graph TB
 - 🌐 **Geographic diversity** - Developers and services can be anywhere
 - 💪 **Resilient** - If one service or developer goes down, others continue operating
 
-**How it works with NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS runs a lightweight web server that handles invoice generation, payment monitoring, and marking orders as "paid" in Shopify's database. 
-
-**Incentives:** Developers (subject to agreement with Shopify merchants) may earn fees on each Shopify sale through BLFS. One developer can service multiple merchants. This is an excellent tool for an independent operator who wants to onboard a number of Shopify merchants.
-
 ---
 
 ## Live Example: Sonia Boyajian
@@ -160,8 +160,6 @@ See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angele
 This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
 
 Our goal was to build something similar, but that did not require a running `bitcoind`, `btcpayserver`, `nbitcoin`, and that required Lightning payments by default, so as to give consumers and merchants a "payment completed in 2 seconds" guarantee. (As long as a high-performance NWC service is used!)
-
-
 
 ---
 
