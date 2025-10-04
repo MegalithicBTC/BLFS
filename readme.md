@@ -17,6 +17,14 @@ BLFS (Bitcoin Lightning for Shopify) is a decentralized server application that 
 
 ---
 
+## Rationale
+
+There are millions of Shopify merchants worldwide who could be onboarded to Lightning. BLFS addresses this by enabling a decentralized network of developers - from junior coders to experienced engineers - to deploy Lightning payment infrastructure for merchants.
+
+By lowering the technical barrier and removing centralized gatekeepers, BLFS allows thousands of developers to independently onboard millions of merchants. Each developer can service multiple merchants and earn fees.
+
+---
+
 ## Prior Art
 
 This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
