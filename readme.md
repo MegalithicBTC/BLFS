@@ -19,70 +19,46 @@ The store owner who wants to accept Bitcoin Lightning payments.
 #### Role #2: BLFS Developer 👨‍💻
 A developer who sets up and operates BLFS to integrate Lightning payments with Shopify store(s).
 
-### Basic Setup: One Developer, One Merchant
+### Basic Setup: One Developer, One Merchant (Merchant connects to an NWC service)
 
 ```mermaid
 graph LR
-  A["🛍️ Shopify Merchant"] <--> B["👨‍💻 BLFS Developer"]
+  Dev["BLFS Developer"] --> Merch["Shopify Merchant"]
+  Merch --> NWC["NWC Service (e.g., Rizful, Alby Hub, LNbits, Coinos, Wallet of Satoshi, Phoenix Server, Zeus, Mutiny, Breez, Custom LND/LDK)"]
 ```
 
-### Scalable Setup: One Developer, Multiple Merchants
+### Scalable Setup: One Developer, Multiple Merchants (each merchant picks their own NWC)
 
 A single BLFS developer can service multiple Shopify merchants, managing Lightning payment infrastructure for all of them.
 
 ```mermaid
 graph TD
-  A["👨‍💻 BLFS Developer"] <--> B["🛍️ Merchant 1"]
-  A <--> C["🛍️ Merchant 2"]
-  A <--> D["🛍️ Merchant 3"]
-  A <--> E["🛍️ Merchant 4"]
+  Dev["BLFS Developer"] --> M1["Merchant 1"]
+  Dev --> M2["Merchant 2"]
+  Dev --> M3["Merchant 3"]
+  Dev --> M4["Merchant 4"]
+
+  M1 --> NWC1["NWC: Rizful"]
+  M2 --> NWC2["NWC: Alby Hub"]
+  M3 --> NWC3["NWC: LNbits"]
+  M4 --> NWC4["NWC: Wallet of Satoshi"]
 ```
 
-### Decentralized Network: Multiple Developers, Multiple Merchants
 
-The true power of BLFS emerges when many independent developers run their own instances, creating a resilient, decentralized network with no single point of failure.
 
-```mermaid
-graph TD
-  D1["👨‍💻 Developer 1"] <--> M1["🛍️ Merchant 1"]
-  D1 <--> M2["🛍️ Merchant 2"]
-  
-  D2["👨‍💻 Developer 2"] <--> M3["🛍️ Merchant 3"]
-  D2 <--> M4["🛍️ Merchant 4"]
-  D2 <--> M5["🛍️ Merchant 5"]
-  
-  D3["👨‍💻 Developer 3"] <--> M6["🛍️ Merchant 6"]
-  
-  D4["👨‍💻 Developer 4"] <--> M7["🛍️ Merchant 7"]
-  D4 <--> M8["🛍️ Merchant 8"]
-  D4 <--> M9["🛍️ Merchant 9"]
-  
-  style D1 fill:#f9a825
-  style D2 fill:#f9a825
-  style D3 fill:#f9a825
-  style D4 fill:#f9a825
-```
+### Complete Ecosystem: Maximum Decentralization (many devs, many merchants, many NWC services; always Merchant → NWC)
 
-### Complete Ecosystem: Maximum Decentralization
-
-Each merchant can choose any NWC service, and each developer can support multiple NWC providers. This creates a truly permissionless, censorship-resistant payment infrastructure.
+Each merchant can choose any NWC service, and each developer can support multiple merchants. This creates a truly permissionless, censorship-resistant payment infrastructure.
 
 ```mermaid
 graph TB
-  subgraph NWC["⚡ NWC Services"]
-    N1["Rizful"]
-    N2["Alby Hub"]
-    N3["LNbits"]
-    N4["Custom Node"]
-  end
-  
-  subgraph Devs["👨‍💻 BLFS Developers"]
+  subgraph Devs["BLFS Developers"]
     D1["Developer 1"]
     D2["Developer 2"]
     D3["Developer 3"]
   end
-  
-  subgraph Merchants["🛍️ Shopify Merchants"]
+
+  subgraph Merchants["Shopify Merchants"]
     M1["Store 1"]
     M2["Store 2"]
     M3["Store 3"]
@@ -90,28 +66,33 @@ graph TB
     M5["Store 5"]
     M6["Store 6"]
   end
-  
-  M1 --> D1
-  M2 --> D1
-  M3 --> D2
-  M4 --> D2
-  M5 --> D3
-  M6 --> D3
-  
-  D1 -.NWC.-> N1
-  D1 -.NWC.-> N2
-  D2 -.NWC.-> N2
-  D2 -.NWC.-> N3
-  D3 -.NWC.-> N1
-  D3 -.NWC.-> N4
-  
-  style N1 fill:#9c27b0
-  style N2 fill:#9c27b0
-  style N3 fill:#9c27b0
-  style N4 fill:#9c27b0
-  style D1 fill:#f9a825
-  style D2 fill:#f9a825
-  style D3 fill:#f9a825
+
+  subgraph NWC["NWC Services"]
+    N1["Rizful"]
+    N2["Alby Hub"]
+    N3["LNbits"]
+    N4["Coinos"]
+    N5["Wallet of Satoshi"]
+    N6["Phoenix Server"]
+    N7["Zeus"]
+    N8["Mutiny"]
+    N9["Breez"]
+    N10["Custom LND/LDK Node"]
+  end
+
+  D1 --> M1
+  D1 --> M2
+  D2 --> M3
+  D2 --> M4
+  D3 --> M5
+  D3 --> M6
+
+  M1 --> N1
+  M2 --> N2
+  M3 --> N3
+  M4 --> N5
+  M5 --> N4
+  M6 --> N10
 ```
 
 **Key Benefits:**
