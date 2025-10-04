@@ -17,6 +17,28 @@ BLFS (Bitcoin Lightning for Shopify) is a lightweight server application. It con
 
 ---
 
+## Live Example: Sonia Boyajian
+
+See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angeles jewelry and ceramics boutique accepting Bitcoin Lightning payments.
+
+<div align="center">
+  
+### Select "Pay with Bitcoin Lightning" at checkout
+<img src="src/public/images/sonia-boyajian-pay-with-bitcoin-lightning-and-complete-order.webp" alt="Select Pay with Bitcoin Lightning at checkout" width="600"/>
+
+### Click the 'Complete Payment' button
+<img src="src/public/images/sonia-boyajian-complete-payment.webp" alt="Click the Complete Payment button" width="600"/>
+
+### Pay the Lightning invoice
+<img src="src/public/images/sonia-boyajian-final-invoice.webp" alt="Pay a Lightning invoice" width="600"/>
+
+### Order complete!
+<img src="src/public/images/sonia-boyajian-order-complete.webp" alt="All done!" width="600"/>
+
+</div>
+
+---
+
 ## Prior Art
 
 This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
