@@ -26,7 +26,7 @@ graph LR
   Dev["👨‍💻 BLFS Developer"] --> Merch["🛍️ Shopify Merchant"]
   Merch --> NWC["⚡ NWC Service (e.g., Rizful, Alby Hub, LNbits, Coinos, Wallet of Satoshi)"]
   
-  style Dev fill:#f9a825
+  style Dev fill:#e65100
   style Merch fill:#2196f3
   style NWC fill:#9c27b0
 ```
@@ -47,7 +47,7 @@ graph TD
   M3 --> NWC3["⚡ LNbits"]
   M4 --> NWC4["⚡ Wallet of Satoshi"]
   
-  style Dev fill:#f9a825
+  style Dev fill:#e65100
   style M1 fill:#2196f3
   style M2 fill:#2196f3
   style M3 fill:#2196f3
@@ -104,9 +104,9 @@ graph TB
   M5 --> N4
   M6 --> N6
   
-  style D1 fill:#f9a825
-  style D2 fill:#f9a825
-  style D3 fill:#f9a825
+  style D1 fill:#e65100
+  style D2 fill:#e65100
+  style D3 fill:#e65100
   style M1 fill:#2196f3
   style M2 fill:#2196f3
   style M3 fill:#2196f3
