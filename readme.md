@@ -60,7 +60,7 @@ graph TD
 
 
 
-### Complete Ecosystem: Maximum Decentralization (many devs, many merchants, many NWC services; always Merchant → NWC)
+### Complete Ecosystem: Maximum Decentralization (many devs, many merchants, many NWC services)
 
 Each merchant can choose any NWC service, and each developer can support multiple merchants. This creates a truly permissionless, censorship-resistant payment infrastructure.
 
