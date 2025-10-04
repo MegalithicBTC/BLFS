@@ -143,6 +143,37 @@
           <% }) %>
         </div>
       </div>
+      
+      <div class="card shadow-sm mt-4">
+        <div class="card-header bg-info text-white">
+          <h5 class="mb-0">Export All Orders Data</h5>
+        </div>
+        <div class="card-body">
+          <form method="get" action="/dev/export-orders" class="d-flex align-items-end gap-3">
+            <div class="flex-grow-1">
+              <label class="form-label">Developer Fee Percentage (%)</label>
+              <input 
+                type="number" 
+                name="devFeePercent" 
+                class="form-control" 
+                placeholder="e.g., 0.05, 1, 5, 10" 
+                step="0.01" 
+                min="0" 
+                max="100"
+                value="1"
+                required>
+              <small class="form-text text-muted">Enter the percentage of gross sales as developer fee (e.g., 0.05 for 0.05%, 1 for 1%, 5 for 5%, etc.)</small>
+            </div>
+            <button type="submit" class="btn btn-info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+              Export CSV
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 

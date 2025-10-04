@@ -355,3 +355,97 @@ router.get('/dev/shops/:publicId/delete', async (req, res) => {
     res.status(500).type('text/plain').send(`Failed to delete merchant: ${e.message || e}`);
   }
 });
+
+router.get('/dev/export-orders', async (req, res) => {
+  try {
+    const devFeePercent = parseFloat(String(req.query.devFeePercent || '1'));
+    if (isNaN(devFeePercent) || devFeePercent < 0 || devFeePercent > 100) {
+      return res.status(400).type('text/plain').send('Invalid developer fee percentage');
+    }
+    
+    // Fetch all orders with their shops, ordered by shop name DESC then date DESC
+    const orders = await Order.find({
+      relations: ['shop'],
+      order: {
+        shop: { domain: 'DESC' },
+        createdAt: 'DESC'
+      }
+    });
+    
+    // Build CSV header
+    const headers = [
+      'Shop Name',
+      'Shop Label',
+      'Order ID',
+      'Order Number',
+      'Order Name',
+      'Status',
+      'Presentment Currency',
+      'Amount Presentment',
+      'Amount Sats',
+      'Gross Sales Sats',
+      `Developer Fee Sats (${devFeePercent}%)`,
+      'Order Summary',
+      'Customer Note',
+      'Shopify Tags',
+      'Payment Hash',
+      'Preimage',
+      'Paid At',
+      'Exchange Rate Used',
+      'Created At',
+      'Expires At'
+    ];
+    
+    // Build CSV rows
+    const rows = orders.map(order => {
+      const msatValue = parseFloat(order.msat);
+      const satsValue = Math.floor(msatValue / 1000);
+      const grossSalesSats = satsValue;
+      const devFeeSats = Math.floor((grossSalesSats * devFeePercent) / 100);
+      
+      return [
+        order.shop.domain,
+        order.shop.label || '',
+        order.id,
+        order.shopifyOrderNumber ?? '',
+        order.shopifyOrderName ?? '',
+        order.status,
+        order.presentmentCurrency,
+        order.amountPresentment,
+        satsValue,
+        grossSalesSats,
+        devFeeSats,
+        (order.orderSummary ?? '').replace(/"/g, '""'),  // Escape quotes in CSV
+        (order.customerNote ?? '').replace(/"/g, '""'),
+        (order.shopifyTags ?? '').replace(/"/g, '""'),
+        order.paymentHash ?? '',
+        order.preimage ?? '',
+        order.paidAt ? order.paidAt.toISOString() : '',
+        order.exchangeRateUsed ?? '',
+        order.createdAt.toISOString(),
+        order.expiresAt.toISOString()
+      ];
+    });
+    
+    // Convert to CSV format
+    const csvContent = [
+      headers.map(h => `"${h}"`).join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+    
+    // Send CSV file
+    const timestamp = new Date().toISOString().split('T')[0];
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename="blfs-orders-export-${timestamp}.csv"`);
+    res.send(csvContent);
+    
+    logger.info({ 
+      msg: 'Orders exported to CSV', 
+      orderCount: orders.length, 
+      devFeePercent 
+    });
+  } catch (e: any) {
+    logger.error({ msg: 'Failed to export orders', error: e });
+    res.status(500).type('text/plain').send(`Failed to export orders: ${e.message || e}`);
+  }
+});
