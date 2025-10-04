@@ -26,9 +26,9 @@ graph LR
   Dev["👨‍💻 BLFS Developer"] --> Merch["🛍️ Shopify Merchant"]
   Merch --> NWC["⚡ NWC Service (e.g., Rizful, Alby Hub, LNbits, Coinos, Wallet of Satoshi)"]
   
-  style Dev fill:#e65100
-  style Merch fill:#2196f3
-  style NWC fill:#9c27b0
+  style Dev fill:#e65100,color:#fff
+  style Merch fill:#2196f3,color:#fff
+  style NWC fill:#9c27b0,color:#fff
 ```
 
 ### Scalable Setup: One Developer, Multiple Merchants (each merchant picks their own NWC)
@@ -47,15 +47,15 @@ graph TD
   M3 --> NWC3["⚡ LNbits"]
   M4 --> NWC4["⚡ Wallet of Satoshi"]
   
-  style Dev fill:#e65100
-  style M1 fill:#2196f3
-  style M2 fill:#2196f3
-  style M3 fill:#2196f3
-  style M4 fill:#2196f3
-  style NWC1 fill:#9c27b0
-  style NWC2 fill:#9c27b0
-  style NWC3 fill:#9c27b0
-  style NWC4 fill:#9c27b0
+  style Dev fill:#e65100,color:#fff
+  style M1 fill:#2196f3,color:#fff
+  style M2 fill:#2196f3,color:#fff
+  style M3 fill:#2196f3,color:#fff
+  style M4 fill:#2196f3,color:#fff
+  style NWC1 fill:#9c27b0,color:#fff
+  style NWC2 fill:#9c27b0,color:#fff
+  style NWC3 fill:#9c27b0,color:#fff
+  style NWC4 fill:#9c27b0,color:#fff
 ```
 
 
@@ -104,21 +104,21 @@ graph TB
   M5 --> N4
   M6 --> N6
   
-  style D1 fill:#e65100
-  style D2 fill:#e65100
-  style D3 fill:#e65100
-  style M1 fill:#2196f3
-  style M2 fill:#2196f3
-  style M3 fill:#2196f3
-  style M4 fill:#2196f3
-  style M5 fill:#2196f3
-  style M6 fill:#2196f3
-  style N1 fill:#9c27b0
-  style N2 fill:#9c27b0
-  style N3 fill:#9c27b0
-  style N4 fill:#9c27b0
-  style N5 fill:#9c27b0
-  style N6 fill:#9c27b0
+  style D1 fill:#e65100,color:#fff
+  style D2 fill:#e65100,color:#fff
+  style D3 fill:#e65100,color:#fff
+  style M1 fill:#2196f3,color:#fff
+  style M2 fill:#2196f3,color:#fff
+  style M3 fill:#2196f3,color:#fff
+  style M4 fill:#2196f3,color:#fff
+  style M5 fill:#2196f3,color:#fff
+  style M6 fill:#2196f3,color:#fff
+  style N1 fill:#9c27b0,color:#fff
+  style N2 fill:#9c27b0,color:#fff
+  style N3 fill:#9c27b0,color:#fff
+  style N4 fill:#9c27b0,color:#fff
+  style N5 fill:#9c27b0,color:#fff
+  style N6 fill:#9c27b0,color:#fff
 ```
 
 **Key Benefits:**
