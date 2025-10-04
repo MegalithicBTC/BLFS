@@ -23,8 +23,12 @@ A developer who sets up and operates BLFS to integrate Lightning payments with S
 
 ```mermaid
 graph LR
-  Dev["BLFS Developer"] --> Merch["Shopify Merchant"]
-  Merch --> NWC["NWC Service (e.g., Rizful, Alby Hub, LNbits, Coinos, Wallet of Satoshi, Phoenix Server, Zeus, Mutiny, Breez, Custom LND/LDK)"]
+  Dev["👨‍💻 BLFS Developer"] --> Merch["🛍️ Shopify Merchant"]
+  Merch --> NWC["⚡ NWC Service (e.g., Rizful, Alby Hub, LNbits, Coinos, Wallet of Satoshi)"]
+  
+  style Dev fill:#f9a825
+  style Merch fill:#2196f3
+  style NWC fill:#9c27b0
 ```
 
 ### Scalable Setup: One Developer, Multiple Merchants (each merchant picks their own NWC)
@@ -33,15 +37,25 @@ A single BLFS developer can service multiple Shopify merchants, managing Lightni
 
 ```mermaid
 graph TD
-  Dev["BLFS Developer"] --> M1["Merchant 1"]
-  Dev --> M2["Merchant 2"]
-  Dev --> M3["Merchant 3"]
-  Dev --> M4["Merchant 4"]
+  Dev["👨‍💻 BLFS Developer"] --> M1["🛍️ Merchant 1"]
+  Dev --> M2["🛍️ Merchant 2"]
+  Dev --> M3["🛍️ Merchant 3"]
+  Dev --> M4["🛍️ Merchant 4"]
 
-  M1 --> NWC1["NWC: Rizful"]
-  M2 --> NWC2["NWC: Alby Hub"]
-  M3 --> NWC3["NWC: LNbits"]
-  M4 --> NWC4["NWC: Wallet of Satoshi"]
+  M1 --> NWC1["⚡ Rizful"]
+  M2 --> NWC2["⚡ Alby Hub"]
+  M3 --> NWC3["⚡ LNbits"]
+  M4 --> NWC4["⚡ Wallet of Satoshi"]
+  
+  style Dev fill:#f9a825
+  style M1 fill:#2196f3
+  style M2 fill:#2196f3
+  style M3 fill:#2196f3
+  style M4 fill:#2196f3
+  style NWC1 fill:#9c27b0
+  style NWC2 fill:#9c27b0
+  style NWC3 fill:#9c27b0
+  style NWC4 fill:#9c27b0
 ```
 
 
@@ -52,13 +66,13 @@ Each merchant can choose any NWC service, and each developer can support multipl
 
 ```mermaid
 graph TB
-  subgraph Devs["BLFS Developers"]
+  subgraph Devs["👨‍💻 BLFS Developers"]
     D1["Developer 1"]
     D2["Developer 2"]
     D3["Developer 3"]
   end
 
-  subgraph Merchants["Shopify Merchants"]
+  subgraph Merchants["🛍️ Shopify Merchants"]
     M1["Store 1"]
     M2["Store 2"]
     M3["Store 3"]
@@ -67,17 +81,13 @@ graph TB
     M6["Store 6"]
   end
 
-  subgraph NWC["NWC Services"]
+  subgraph NWC["⚡ NWC Services"]
     N1["Rizful"]
     N2["Alby Hub"]
     N3["LNbits"]
     N4["Coinos"]
     N5["Wallet of Satoshi"]
-    N6["Phoenix Server"]
-    N7["Zeus"]
-    N8["Mutiny"]
-    N9["Breez"]
-    N10["Custom LND/LDK Node"]
+    N6["Zeus"]
   end
 
   D1 --> M1
@@ -92,7 +102,23 @@ graph TB
   M3 --> N3
   M4 --> N5
   M5 --> N4
-  M6 --> N10
+  M6 --> N6
+  
+  style D1 fill:#f9a825
+  style D2 fill:#f9a825
+  style D3 fill:#f9a825
+  style M1 fill:#2196f3
+  style M2 fill:#2196f3
+  style M3 fill:#2196f3
+  style M4 fill:#2196f3
+  style M5 fill:#2196f3
+  style M6 fill:#2196f3
+  style N1 fill:#9c27b0
+  style N2 fill:#9c27b0
+  style N3 fill:#9c27b0
+  style N4 fill:#9c27b0
+  style N5 fill:#9c27b0
+  style N6 fill:#9c27b0
 ```
 
 **Key Benefits:**
