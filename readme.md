@@ -1,8 +1,8 @@
 <div align="center">
   <img src="src/public/images/blfs-square-one.webp" alt="BLFS Logo" width="300"/>
-  
+
   # BLFS
-  ### Bitcoin Lightning for Shopify
+  ### Bitcoin Lightning For Shopify
 </div>
 
 ## About
