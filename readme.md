@@ -11,7 +11,7 @@ BLFS (Bitcoin Lightning for Shopify) is a lightweight server application. It con
 
 **Decentralization:** BLFS is designed to be run by anyone. Any developer may run their own BLFS instance and connect merchants to any of many NWC-compatible Lightning services.
 
-** NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS runs a lightweight web server that handles invoice generation, payment monitoring, and marking orders as "paid" in Shopify's database. 
+**NWC:** BLFS uses Nostr Wallet Connect (NWC) to communicate with Lightning nodes, wallets, and vaults. Merchants provide a receive-only NWC connection string, and BLFS runs a lightweight web server that handles invoice generation, payment monitoring, and marking orders as "paid" in Shopify's database. 
 
 **Incentives:** Developers (subject to agreement with Shopify merchants) may earn fees on each Shopify sale through BLFS. One developer can service multiple merchants. This is an excellent tool for an independent operator who wants to onboard a number of Shopify merchants.
 
