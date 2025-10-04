@@ -161,7 +161,6 @@ Our goal was to build something similar, but that did not require a running `bit
 ## Documentation
 
 Complete documentation is available at [BLFS @ Megalith Lightning Docs](https://docs.megalithic.me/BLFS/getting-started).
-### Documentation Pages
 
 1. **[Getting Started](https://docs.megalithic.me/BLFS/getting-started)** - Overview of BLFS architecture, benefits for merchants and operators, and real-world examples.
 
