@@ -32,7 +32,11 @@ export async function createInvoiceForCheckout(params: {
   const { shop, wallet, amount, currency, checkoutToken, orderGid, orderName, desc, existingOrder } = params;
 
   const rate = await btcPrice(currency);
-  const msat = await fiatToMsat(amount, currency);
+  const rawMsat = await fiatToMsat(amount, currency);
+  // Round up to next whole sat (multiple of 1000 msats) to avoid Alby display bug
+  // while remaining 100% NIP-47 compliant
+  const msatRounded = ((rawMsat + 999n) / 1000n) * 1000n; // ceil to next 1000 msats
+  const msat = msatRounded === 0n ? 1000n : msatRounded;   // ensure ≥ 1 sat
 
   const memo = buildBolt11Memo({
     orderName: orderName || undefined,
