@@ -1,4 +1,13 @@
 {
+  "name": "blfs",
+  "version": "0.1.2",
+  "description": "Bitcoin Lightning for Shopify - Accept Lightning payments via NWC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MegalithicBTC/BLFS.git"
+  },
+  "author": "MegalithicBTC",
+  "license": "MIT",
   "dependencies": {
     "@getalby/sdk": "^6.0.1",
     "@types/bcryptjs": "^2.4.6",
