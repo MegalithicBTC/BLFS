@@ -30,9 +30,10 @@ See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angele
 <img src="src/public/images/sonia-boyajian-order-complete.webp" alt="All done!" width="600"/>
 
 </div>
+
 ---
 
-### BLFS: Two Key Roles
+### Merchant & Developer Roles
 
 #### Role #1: Shopify Merchant 🛍️
 The store owner who wants to accept Bitcoin Lightning payments.
