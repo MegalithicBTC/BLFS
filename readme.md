@@ -9,7 +9,29 @@
 
 BLFS (Bitcoin Lightning for Shopify) enables Shopify merchants to receive zero-fee Bitcoin payments over the Lightning Network, without trusting any counterparty. 
 
-### How BLFS Works: Two Key Roles
+---
+
+## Live Example: Sonia Boyajian
+
+See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angeles jewelry and ceramics boutique accepting Bitcoin Lightning payments.
+
+<div align="center">
+  
+### Select "Pay with Bitcoin Lightning" at checkout
+<img src="src/public/images/sonia-boyajian-pay-with-bitcoin-lightning-and-complete-order.webp" alt="Select Pay with Bitcoin Lightning at checkout" width="600"/>
+
+### Click the 'Complete Payment' button
+<img src="src/public/images/sonia-boyajian-complete-payment.webp" alt="Click the Complete Payment button" width="600"/>
+
+### Pay the Lightning invoice
+<img src="src/public/images/sonia-boyajian-final-invoice.webp" alt="Pay a Lightning invoice" width="600"/>
+
+### Order complete!
+<img src="src/public/images/sonia-boyajian-order-complete.webp" alt="All done!" width="600"/>
+
+</div>
+
+### BLFS: Two Key Roles
 
 #### Role #1: Shopify Merchant 🛍️
 The store owner who wants to accept Bitcoin Lightning payments.
@@ -31,7 +53,7 @@ graph LR
 
 ### Scalable Setup: One Developer, Multiple Merchants 
 
-A single BLFS developer can service multiple Shopify merchants, managing Lightning payment infrastructure for all of them.
+A single BLFS developer may service multiple Shopify merchants, managing Lightning payment infrastructure for all of them.
 
 ```mermaid
 graph TD
@@ -56,28 +78,6 @@ graph TD
   style NWC4 fill:#9c27b0,color:#fff
 ```
 
-
----
-
-## Live Example: Sonia Boyajian
-
-See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angeles jewelry and ceramics boutique accepting Bitcoin Lightning payments.
-
-<div align="center">
-  
-### Select "Pay with Bitcoin Lightning" at checkout
-<img src="src/public/images/sonia-boyajian-pay-with-bitcoin-lightning-and-complete-order.webp" alt="Select Pay with Bitcoin Lightning at checkout" width="600"/>
-
-### Click the 'Complete Payment' button
-<img src="src/public/images/sonia-boyajian-complete-payment.webp" alt="Click the Complete Payment button" width="600"/>
-
-### Pay the Lightning invoice
-<img src="src/public/images/sonia-boyajian-final-invoice.webp" alt="Pay a Lightning invoice" width="600"/>
-
-### Order complete!
-<img src="src/public/images/sonia-boyajian-order-complete.webp" alt="All done!" width="600"/>
-
-</div>
 
 
 ---
