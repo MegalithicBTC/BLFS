@@ -30,6 +30,7 @@ See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angele
 <img src="src/public/images/sonia-boyajian-order-complete.webp" alt="All done!" width="600"/>
 
 </div>
+---
 
 ### BLFS: Two Key Roles
 
