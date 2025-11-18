@@ -79,13 +79,6 @@ See BLFS in action at [soniabstyle.com](https://soniabstyle.com/) - a Los Angele
 
 </div>
 
----
-
-## Acknowledgments 
-
-This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
-
-Our goal was to build something similar, but that did not require a running `bitcoind`, `btcpayserver`, `nbitcoin`, and that required Lightning payments by default, so as to give consumers and merchants a "payment completed in 2 seconds" guarantee. (As long as a high-performance NWC service is used!)
 
 ---
 
@@ -220,6 +213,15 @@ AWS_REGION=us-east-1
 ```
 
 See the [Litestream documentation](https://litestream.io/guides/s3/) for detailed configuration options.
+
+---
+
+## Acknowledgments 
+
+This implementation is inspired by the BTCPay Server Shopify plugin created by [TChukwuleta](https://github.com/TChukwuleta), [ndeet](https://github.com/ndeet), and [NicolasDorier](https://github.com/NicolasDorier).
+
+Our goal was to build something similar, but that did not require a running `bitcoind`, `btcpayserver`, `nbitcoin`, and that required Lightning payments by default, so as to give consumers and merchants a "payment completed in 2 seconds" guarantee. (As long as a high-performance NWC service is used!)
+
 
 ---
 
