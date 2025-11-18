@@ -7,7 +7,7 @@
 
 ## About
 
-BLFS (Bitcoin Lightning for Shopify) is a lightweight server application. It enabeles Shopify merchants to receive zero-fee Bitcoin payments over the Lightning Network.
+BLFS (Bitcoin Lightning for Shopify) enables Shopify merchants to receive zero-fee Bitcoin payments over the Lightning Network, without trusting any counterparty. 
 
 ### How BLFS Works: Two Key Roles
 
